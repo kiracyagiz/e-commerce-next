@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { db } from '@component/app/firebase'
 import { doc,getDoc } from 'firebase/firestore'
+import { updateDoc } from "firebase/firestore";
 
 const ProductId = ({params}) => {
     const [productData, setProductData] = useState(null);
