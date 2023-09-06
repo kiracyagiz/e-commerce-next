@@ -17,25 +17,28 @@ const Login = () => {
       router.push('/dashboard')
     } catch (error) {
       console.error("Mistake in the login process:", error);
+      alert('asdsad')
     }
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="mx-auto justify-center items-center flex flex-col text-center mt-24 gap-y-8 shadow-2xl bg-blue-400 p-12 px-52 rounded w-fit">
+      <h1 className="text-xl text-white">ADMIN</h1>
       <input
         type="email"
-        placeholder="E-posta"
+        placeholder="E-mail"
         value={email}
+        className=" placeholder:text-black outline-none px-4"
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
         type="password"
-        placeholder="Şifre"
+        placeholder="Password"
+        className="placeholder:text-black outline-none px-4"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={handleLogin}>Giriş Yap</button>
+      <button onClick={handleLogin} className="bg-white px-4 py-1">Log In</button>
     </div>
   );
 };
