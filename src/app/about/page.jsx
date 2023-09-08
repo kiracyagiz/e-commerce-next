@@ -1,7 +1,10 @@
 import React from "react";
+import Navbar from "../components/Navbar";
 
 const About = () => {
   return (
+    <>
+    <Navbar/>
     <div className=" py-12">
       <div className="container mx-auto max-w-4xl p-8 rounded-lg shadow-lg bg-white">
         <h2 className="text-3xl font-semibold text-center mb-8">ABOUT US</h2>
@@ -27,7 +30,7 @@ const About = () => {
           nemo nostrum quibusdam suscipit.
         </p>
       </div>
-    </div>
+    </div></>
   );
 };
 

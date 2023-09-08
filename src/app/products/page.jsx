@@ -9,21 +9,24 @@ import {
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Navbar from "../components/Navbar";
 
 const Products = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
+
+
   useEffect(() => {
     const q = query(collection(db, "items"));
     const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
-      let namesArr = [];
+      let itemArr = [];
 
       QuerySnapshot.forEach((doc) => {
-        namesArr.push({ ...doc.data(), id: doc.id });
+        itemArr.push({ ...doc.data(), id: doc.id });
       });
 
-      setItems(namesArr);
+      setItems(itemArr);
       setLoading(false);
     });
 
@@ -33,6 +36,8 @@ const Products = () => {
   }, []);
 
   return (
+    <>
+    <Navbar/>
     <div className="p-8 flex flex-wrap gap-20 justify-center ">
       {loading ? (
         <div className="text-3xl">Loading...</div>
@@ -53,7 +58,7 @@ const Products = () => {
           </div>
         ))
       )}
-    </div>
+    </div></>
   );
 };
 

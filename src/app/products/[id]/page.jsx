@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { db } from '@component/app/firebase'
 import { doc,getDoc } from 'firebase/firestore'
 import { updateDoc } from "firebase/firestore";
+import Navbar from "@component/app/components/Navbar";
 
 const ProductId = ({params}) => {
     const [productData, setProductData] = useState(null);
@@ -30,6 +31,8 @@ const ProductId = ({params}) => {
      
 
   return (
+    <>
+    <Navbar/>
     <div className=" min-h-full">
     {productData ? (
       <div className="flex flex-col md:flex-row gap-x-12 justify-between gap-y-8 p-12 mt-12">
@@ -46,7 +49,7 @@ const ProductId = ({params}) => {
     ) : (
       <p>Loading...</p>
     )}
-  </div> 
+  </div> </>
   )
 }
 

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import firebaseConfig from "../firebase"; 
 import { useRouter } from "next/navigation";
+import Navbar from "../components/Navbar";
 const auth = getAuth();
 
 const Login = () => {
@@ -22,6 +23,7 @@ const Login = () => {
   };
 
   return (
+   <>
     <div className="mx-auto justify-center items-center flex flex-col text-center mt-24 gap-y-8 shadow-2xl bg-blue-400 p-12 px-52 rounded w-fit">
       <h1 className="text-xl text-white">ADMIN</h1>
       <input
@@ -40,6 +42,7 @@ const Login = () => {
       />
       <button onClick={handleLogin} className="bg-white px-4 py-1">Log In</button>
     </div>
+   </>
   );
 };
 

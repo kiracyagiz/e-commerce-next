@@ -1,7 +1,7 @@
 "use client";
 import firebaseConfig from "../firebase";
 import { useRouter } from "next/navigation";
-import { getAuth } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { db } from "../firebase";
 import {
@@ -20,14 +20,18 @@ const Dashboard = () => {
   const [user, loading] = useAuthState(auth);
   const router = useRouter();
 
-     if (!user) {
-    router.replace("/login");
-    return null;
-  }
-  
-  const [items, setItems] = useState([]);
-  const [loadingg, setLoading] = useState(true);
+  useEffect(() => {
+    if (loading) {
+      return;     // If user login once thanks to loading we can save it.
+    }
 
+    if (!user) {
+      router.replace('/login');
+    }
+  }, [user, loading, router]);
+
+  const [items,setItems] = useState([])
+  const [loadingg, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem,setSelectedItem] = useState(null);
   const [isAddModalOpen,setIsAddModelOpen] = useState(false)
@@ -50,18 +54,16 @@ const Dashboard = () => {
 
   }
 
-
-
   useEffect(() => {
     const q = query(collection(db, "items"));
     const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
-      let namesArr = [];
+      let itemArr = [];
 
       QuerySnapshot.forEach((doc) => {
-        namesArr.push({ ...doc.data(), id: doc.id });
+        itemArr.push({ ...doc.data(), id: doc.id });
       });
 
-      setItems(namesArr);
+      setItems(itemArr);
       setLoading(false);
     });
 
@@ -70,8 +72,30 @@ const Dashboard = () => {
     };
   }, []);
 
+  const handleSignOut = async () => {
+    try{
+      await signOut(auth);
+      router.replace('/login')
+    }
+    catch(error){
+      console.log('Error during signOut Process : ' , error)
+    }
+  }
+
+
   return (
     <>
+      <div className="flex  mx-auto  flex-col md:flex-row justify-evenly">
+        <div>
+        {
+          user ? <p>Welcome <span className="font-bold">{user.email }</span></p> : <p>User Is Not Defined</p>
+        }
+        
+        </div>
+         <div>
+          <button onClick={handleSignOut}>Sıgn Out</button>
+         </div>
+      </div>
       <div className="p-8 flex flex-wrap gap-20 justify-center ">
         {loadingg ? (
           <div className="text-3xl">Loading...</div>
@@ -90,7 +114,10 @@ const Dashboard = () => {
           ))
         )}
       </div>
-      <div className="text-center">
+
+      {
+        loadingg ? <div></div> : 
+        <div className="text-center">
         <button
           onClick={() => setIsAddModelOpen(true)}
           className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md focus:outline-none"
@@ -100,6 +127,8 @@ const Dashboard = () => {
         <AddProductModal isOpen={isAddModalOpen} onClose={closeAddModal} />
 
       </div>
+      }
+
     </>
   );
 };

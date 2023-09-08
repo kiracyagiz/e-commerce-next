@@ -1,9 +1,13 @@
 import React from 'react';
 import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi'; 
 import 'tailwindcss/tailwind.css'; 
+import Navbar from '../components/Navbar';
 
 const Contact = () => {
+
   return (
+  <>
+    <Navbar/>
     <div className="bg-white rounded-lg shadow-md p-6 mx-auto mt-12 max-w-md ">
       <h1 className="text-2xl font-semibold mb-4">Contact Us</h1>
       <p className="text-gray-600 mb-4">
@@ -29,6 +33,7 @@ const Contact = () => {
       </div>
 
     </div>
+  </>
   );
 }
 
