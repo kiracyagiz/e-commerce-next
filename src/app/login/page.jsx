@@ -1,5 +1,4 @@
 "use client"
-
 import { useEffect, useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import firebaseConfig from "../firebase"; 
@@ -13,16 +12,13 @@ const Login = () => {
   const [user] = useAuthState(auth);
   const router = useRouter();
 
-      
   useEffect(() => {
-    if(user)
-    {
+    if (user) {
       router.replace('/dashboard')
-    }
-    else{
+    } else {
       return;
     }
-  },[user])
+  }, [user])
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,27 +34,27 @@ const Login = () => {
   };
 
   return (
-   <>
-   <Navbar/>
-    <div className="mx-auto justify-center items-center flex flex-col text-center mt-24 gap-y-8 shadow-2xl bg-blue-400 p-12 px-52 rounded w-fit">
-      <h1 className="text-xl text-white">ADMIN</h1>
-      <input
-        type="email"
-        placeholder="E-mail"
-        value={email}
-        className=" placeholder:text-black outline-none px-4"
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        className="placeholder:text-black outline-none px-4"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin} className="bg-white px-4 py-1">Log In</button>
-    </div>
-   </>
+    <>
+      <Navbar />
+      <div className="mx-auto justify-center items-center flex flex-col text-center mt-44 gap-y-8 shadow-2xl bg-blue-400 p-4 sm:p-12 px-4 sm:px-52  rounded w-full sm:w-fit">
+        <h1 className="text-xl text-white">ADMIN</h1>
+        <input
+          type="email"
+          placeholder="E-mail"
+          value={email}
+          className="placeholder:text-black outline-none px-4 w-full"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          className="placeholder:text-black outline-none px-4 w-full"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button onClick={handleLogin} className="bg-white px-4 py-1">Log In</button>
+      </div>
+    </>
   );
 };
 
