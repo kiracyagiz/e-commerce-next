@@ -10,6 +10,7 @@ const Navbar = () => {
       {name:"ABOUT",link:"/about"},
       {name:"PRODUCT",link:"/products"},
       {name:"CONTACT",link:"/contact"},
+      {name:'LOGIN',link:'/login'}
     ];
     let [open,setOpen]=useState(false);
   return (
