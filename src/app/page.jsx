@@ -4,7 +4,7 @@ export default function Home() {
   return (
    <>
    <Navbar/>
-    <main className=" p-8 flex flex-col md:flex-row justify-between ">
+    <main className=" p-8 flex flex-col md:flex-row justify-between mt-12 ">
       <div className="md:w-1/2  mt-20 max-w-lg ">
         <p className="text-3xl mb-4">E-COMMERCE FASHION</p>
         <p>

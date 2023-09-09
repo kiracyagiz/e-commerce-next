@@ -38,7 +38,7 @@ const Products = () => {
   return (
     <>
     <Navbar/>
-    <div className="p-8 flex flex-wrap gap-20 justify-center ">
+    <div className="p-8 flex flex-wrap gap-20 justify-center mt-12 ">
       {loading ? (
         <div className="text-3xl">Loading...</div>
       ) : (

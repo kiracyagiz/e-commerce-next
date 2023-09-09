@@ -1,62 +1,42 @@
-import Link from "next/link";
-import React from "react";
-import {
-  AiOutlineInstagram,
-  AiOutlineMenu,
-  AiOutlineLinkedin,
-  AiFillTwitterSquare,
-} from "react-icons/ai";
-const Navbar = () => {
-  const items = [
-    {
-      text: "HOME",
-      to: "/",
-    },
-    {
-      text: "ABOUT",
-      to: "/about",
-    },
-    {
-      text: "PRODUCTS",
-      to: "/products",
-    },
-    {
-      text: "CONTACT",
-      to: "/contact",
-    },
-  ];
+"use client"
 
+import React, { useState } from 'react'
+import {AiOutlineMenu} from 'react-icons/ai'
+
+
+const Navbar = () => {
+    let Links =[
+      {name:"HOME",link:"/"},
+      {name:"ABOUT",link:"/about"},
+      {name:"PRODUCT",link:"/products"},
+      {name:"CONTACT",link:"/contact"},
+    ];
+    let [open,setOpen]=useState(false);
   return (
-    <div className="flex justify-between md:justify-around p-8 mx-auto">
-      <div>LOGO</div>
-      <div className="md:flex gap-x-8 mx-auto hidden  ">
-        {items.map((dt, i) => (
-          <Link href={dt.to}>
-            <p key={i} className="hover:text-blue-500 cursor-pointer">
-              {dt.text}
-            </p>
-          </Link>
-        ))}
+    <div className=' w-full fixed top-0 left-0 '>
+      <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
+      <div className='font-bold text-2xl cursor-pointer flex items-center 
+      text-gray-800'>
+        Logo
       </div>
-      <div className="block md:hidden">
-        <AiOutlineMenu />
+      
+      <div onClick={()=>setOpen(!open)} className='text-3xl absolute right-8 top-6 cursor-pointer md:hidden'>
+        <AiOutlineMenu size={20} name={open ? 'close' : 'menu'}/>
       </div>
-      <div className="hidden md:flex gap-x-8 ">
-        <AiOutlineInstagram
-          size={25}
-          className="hover:text-blue-500 cursor-pointer"
-        />
-        <AiOutlineLinkedin
-          size={25}
-          className="hover:text-blue-500 cursor-pointer"
-        />
-        <AiFillTwitterSquare
-          size={25}
-          className="hover:text-blue-500 cursor-pointer"
-        />
+
+      <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-20 ':'top-[-490px]'}`}>
+        {
+          Links.map((link)=>(
+            <li key={link.name} className='md:ml-8 md:my-0 my-7'>
+              <a href={link.link} className='text-gray-800 hover:text-gray-400 duration-500'>{link.name}</a>
+            </li>
+          ))
+        }
+       
+      </ul>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
