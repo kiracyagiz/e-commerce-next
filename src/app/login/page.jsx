@@ -24,6 +24,7 @@ const Login = () => {
 
   return (
    <>
+   <Navbar/>
     <div className="mx-auto justify-center items-center flex flex-col text-center mt-24 gap-y-8 shadow-2xl bg-blue-400 p-12 px-52 rounded w-fit">
       <h1 className="text-xl text-white">ADMIN</h1>
       <input
