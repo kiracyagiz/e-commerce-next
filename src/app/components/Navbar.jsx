@@ -1,25 +1,45 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {AiOutlineMenu} from 'react-icons/ai'
 import Link from 'next/link'
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { getAuth } from 'firebase/auth';
+import { db } from "../firebase";
 
 
 const Navbar = () => {
+
+    const [login,setLogin] = useState(null)
+    
+    useEffect(() => {
+      if(user)
+      {
+        setLogin('dashboard')
+      }
+      else{
+        setLogin('login')
+      }
+    })
+
     let Links =[
       {name:"HOME",link:"/"},
       {name:"ABOUT",link:"/about"},
       {name:"PRODUCT",link:"/products"},
       {name:"CONTACT",link:"/contact"},
-      {name:'LOGIN',link:'/login'}
+      {name:login,link:`/${login}`}
     ];
     let [open,setOpen]=useState(false);
+    const auth = getAuth();
+    const [user] = useAuthState(auth);
+
+
   return (
     <div className=' w-full fixed top-0 left-0 '>
       <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
       <div className='font-bold text-2xl cursor-pointer flex items-center 
       text-gray-800'>
-        <Link href='/'><p>LOGO</p></Link>
+        <Link href={'/'}>LOGO</Link>
       </div>
       
       <div onClick={()=>setOpen(!open)} className='text-3xl absolute right-8 top-6 cursor-pointer md:hidden'>
@@ -30,7 +50,7 @@ const Navbar = () => {
         {
           Links.map((link)=>(
             <li key={link.name} className='md:ml-8 md:my-0 my-7'>
-              <Link href={link.link}><p className='text-gray-800 hover:text-gray-400 duration-500'>{link.name}</p></Link>
+              <Link href={link.link}><p className='text-gray-800 hover:text-gray-400 duration-500'>{link.name?.toUpperCase()}</p></Link>
             </li>
           ))
         }
