@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import {AiOutlineMenu} from 'react-icons/ai'
+import Link from 'next/link'
 
 
 const Navbar = () => {
@@ -18,7 +19,7 @@ const Navbar = () => {
       <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
       <div className='font-bold text-2xl cursor-pointer flex items-center 
       text-gray-800'>
-        Logo
+        <Link href='/'><p>LOGO</p></Link>
       </div>
       
       <div onClick={()=>setOpen(!open)} className='text-3xl absolute right-8 top-6 cursor-pointer md:hidden'>
@@ -29,7 +30,7 @@ const Navbar = () => {
         {
           Links.map((link)=>(
             <li key={link.name} className='md:ml-8 md:my-0 my-7'>
-              <a href={link.link} className='text-gray-800 hover:text-gray-400 duration-500'>{link.name}</a>
+              <Link href={link.link}><p className='text-gray-800 hover:text-gray-400 duration-500'>{link.name}</p></Link>
             </li>
           ))
         }
