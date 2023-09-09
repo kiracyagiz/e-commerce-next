@@ -1,16 +1,31 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import firebaseConfig from "../firebase"; 
 import { useRouter } from "next/navigation";
 import Navbar from "../components/Navbar";
+import { useAuthState } from 'react-firebase-hooks/auth';
 const auth = getAuth();
 
 const Login = () => {
+  const auth = getAuth();
+  const [user] = useAuthState(auth);
+  const router = useRouter();
+
+      
+  useEffect(() => {
+    if(user)
+    {
+      router.replace('/dashboard')
+    }
+    else{
+      return;
+    }
+  },[user])
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
 
   const handleLogin = async () => {
     try {

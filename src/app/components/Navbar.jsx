@@ -3,35 +3,23 @@
 import React, { useEffect, useState } from 'react'
 import {AiOutlineMenu} from 'react-icons/ai'
 import Link from 'next/link'
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { getAuth } from 'firebase/auth';
-import { db } from "../firebase";
+
 
 
 const Navbar = () => {
 
-    const [login,setLogin] = useState(null)
-    
-    useEffect(() => {
-      if(user)
-      {
-        setLogin('dashboard')
-      }
-      else{
-        setLogin('login')
-      }
-    },[login])
+
 
     let Links =[
       {name:"HOME",link:"/"},
       {name:"ABOUT",link:"/about"},
       {name:"PRODUCT",link:"/products"},
       {name:"CONTACT",link:"/contact"},
-      { name: login ? login.toUpperCase() : "", link: `/${login}` },
+      {name: 'LOGIN',link: '/login'}
+    
     ];
     let [open,setOpen]=useState(false);
-    const auth = getAuth();
-    const [user] = useAuthState(auth);
+
 
 
 
