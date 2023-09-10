@@ -73,7 +73,7 @@ const ProductId = ({ params }) => {
               <img src={dt.image} className="rounded-full" alt="" />
               <p className="font-bold text-center">{dt.username}</p>
             </div>
-            <p className={`text-xs md:text-sm md:text-left  text-center  md:max-w-2xl `}>{dt.comment}</p>
+            <p className={`text-xs md:text-sm   md:max-w-2xl `}>{dt.comment}</p>
 
             <div className="flex gap-x-4">
               <div className="flex  items-center mt-4">
