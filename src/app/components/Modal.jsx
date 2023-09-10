@@ -37,15 +37,18 @@ const Modal = ({ isOpen, onClose, selectedItem }) => {
     try {
       const itemRef = doc(db, 'items', id);
 
-      const updatedData = {
-        title,
-        category,
-        price,
-        image,
-        desc
-      };
+    
+        const updatedData = {
+          title,
+          category,
+          price,
+          image,
+          desc
+        };
+           
       await updateDoc(itemRef, updatedData);
       onClose();
+     
 
     } catch (error) {
       console.error("Data error:", error);
@@ -76,7 +79,7 @@ const Modal = ({ isOpen, onClose, selectedItem }) => {
             </button>
             <input type="text" className="border border-gray-300 rounded-md p-2" value={title ? title : ''} onChange={(e) => setTitle(e.target.value)} />
             <input type="text" className="border border-gray-300 rounded-md p-2" value={category ? category : ''} onChange={(e) => setCategory(e.target.value)} />
-            <input type="text" className="border border-gray-300 rounded-md p-2" value={price ? price : ''} onChange={(e) => setPrice(e.target.value)} />
+            <input type="number" className="border border-gray-300 rounded-md p-2" value={price ? price : ''} onChange={(e) => setPrice(e.target.value)} />
             <input type="text" className="border border-gray-300 rounded-md p-2" value={image ? image : ''} onChange={(e) => setImage(e.target.value)} />
             <input type="text" className="border border-gray-300 rounded-md p-2" value={desc ? desc : ''} onChange={(e) => setDesc(e.target.value)} />
 

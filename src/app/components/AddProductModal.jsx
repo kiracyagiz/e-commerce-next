@@ -11,6 +11,11 @@ const AddProductModal = ({ isOpen, onClose }) => {
 
   const handleAddItem = async () => {
     try {
+     if(isNaN(price))
+     {
+      alert('You cant write string to price section')
+     }
+     else{
       const itemData = {
         title,
         category,
@@ -22,7 +27,8 @@ const AddProductModal = ({ isOpen, onClose }) => {
       await addDoc(collection(db, "items"), itemData);
       onClose()
 
-      console.log("Item added successfully!");
+     }
+
     } catch (error) {
       console.error("Error adding item: ", error);
     }
@@ -67,7 +73,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
               type="number"
               placeholder="Price"
             />
-                        <input
+              <input
               onChange={(e) => setDesc(e.target.value)}
               className="w-full p-2 border rounded placeholder-gray-400"
               type="text"
