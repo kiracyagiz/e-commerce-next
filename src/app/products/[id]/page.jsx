@@ -92,7 +92,7 @@ const ProductId = ({ params }) => {
           </div>
         ))
        : 
-       <div>There is no comment</div>
+       <div className="text-center">There is no comment</div>
        }
       </div>
     </>
